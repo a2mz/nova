@@ -53,3 +53,5 @@ SettlementsResp c = QueryFactory.withKey("key").address().getSettlements(null,nu
 ```java
 StreetResp c = QueryFactory.withKey("key").address().getStreet("Броварський", "ebc0eda9-93ec-11e3-b441-0050568002cf");
 ```
+
+#### Контрагенты
