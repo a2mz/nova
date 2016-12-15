@@ -90,18 +90,18 @@ public class ContragentsFactory {
 	 * @param type CounterpartyProperty
 	 * @param page Number of page need if >100 row selected
 	 */
-	public CounterpartyResp getCounterpartyOptions(CounterpartyProperty type, int page) throws IOException, RequestStatusException {
+	public CounterpartyResp getCounterparties(CounterpartyProperty type, int page) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.GET_COUNTERPARTIES;
 		ModelName model = ModelName.COUNTERPARTY;
 		return HttpClient.createHttpClient(CounterpartyResp.class, requestConfig)
-				.sendPost(getUrl(method, model), constructCounterpartyOptionsRequest(type, page, model, method));
+				.sendPost(getUrl(method, model), constructCounterpartiesRequest(type, page, model, method));
 	}
 
 	private String getUrl(CalledMethod method, ModelName model) {
 		return String.format(HttpConfig.HOST + "/v2.0/json/%s/%s/", model.getVal(), method.getVal());
 	}
 
-	private ServiceModel constructCounterpartyOptionsRequest(CounterpartyProperty type, int page, ModelName model, CalledMethod method) {
+	private ServiceModel constructCounterpartiesRequest(CounterpartyProperty type, int page, ModelName model, CalledMethod method) {
 		return ServiceModel.create(apiKey, model, method)
 				.setMethodProperties(
 						CounterpartyReq.create()

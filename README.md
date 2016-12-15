@@ -57,9 +57,13 @@ StreetResp c = QueryFactory.withKey("key").address().getStreet("Броварсь
 #### Контрагенты
 Работа с данными Контрагента
 
+* [Загрузить список адресов Контрагентов](https://devcenter.novaposhta.ua/docs/services/557eb8c8a0fe4f02fc455b2d/operations/557fdcb4a0fe4f105c087611)
+```java
+CounterpartyAddressesResp c =  QueryFactory.withKey("key").contragent().getCounterpartyAddresses("00000000-0000-0000-0000-000000000000",CounterpartyProperty.SENDER);
+```
 * [Загрузить список контактных лиц Контрагента](https://devcenter.novaposhta.ua/docs/services/557eb8c8a0fe4f02fc455b2d/operations/557fe424a0fe4f105c087612)
 ```java
-CounterpartyResp c = QueryFactory.withKey("key").contragent().getCounterpartyOptions(CounterpartyProperty.SENDER, 1);
+CounterpartyResp c = QueryFactory.withKey("key").contragent().getCounterpartyContactPersons("00000000-0000-0000-0000-000000000000",1);
 ```
 * [Загрузить список Контрагентов отправителей/получателей](https://devcenter.novaposhta.ua/docs/services/557eb8c8a0fe4f02fc455b2d/operations/557fd789a0fe4f105c08760f)
 ```java
