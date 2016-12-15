@@ -290,4 +290,21 @@ public class Counterparty {
 		this.cityDescription = cityDescription;
 	}
 
+	@Override
+	public String toString() {
+		return "Counterparty{" +
+				"description='" + description + '\'' +
+				", ref='" + ref + '\'' +
+				", city='" + city + '\'' +
+				", counterparty=" + counterparty +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", middleName='" + middleName + '\'' +
+				", ownershipFormRef='" + ownershipFormRef + '\'' +
+				", ownershipFormDescription='" + ownershipFormDescription + '\'' +
+				", eDRPOU='" + eDRPOU + '\'' +
+				", counterpartyType='" + counterpartyType + '\'' +
+				", cityDescription='" + cityDescription + '\'' +
+				'}';
+	}
 }

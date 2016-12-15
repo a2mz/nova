@@ -1,4 +1,4 @@
-package a2mz.nova4j.entity.header;
+package a2mz.nova4j.entity.common;
 
 /**
  * Created by Morozov Oleksandr on 29.11.2016.
@@ -13,7 +13,9 @@ public enum CalledMethod {
 	GET_SETTLEMENTS("getSettlements"),
 	GET_WAREHOUSES("getWarehouses"),
 	GET_STREET("getStreet"),
-	GET_COUNTERPARTIES("getCounterparties");
+	GET_COUNTERPARTIES("getCounterparties"),
+	GET_COUNTERPARTY_CONTACT_PERSONS("getCounterpartyContactPersons"),
+	GET_COUNTERPARTY_ADDRESSES("getCounterpartyContactPersons");
 	private String val;
 
 	CalledMethod(String val) {

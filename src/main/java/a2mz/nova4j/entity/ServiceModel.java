@@ -1,8 +1,8 @@
 package a2mz.nova4j.entity;
 
-import a2mz.nova4j.entity.header.CalledMethod;
-import a2mz.nova4j.entity.header.ModelName;
-import a2mz.nova4j.entity.header.MethodProperties;
+import a2mz.nova4j.entity.common.CalledMethod;
+import a2mz.nova4j.entity.common.ModelName;
+import a2mz.nova4j.entity.common.MethodProperties;
 import lombok.Getter;
 
 /**

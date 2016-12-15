@@ -3,7 +3,7 @@ package a2mz.nova4j.entity.address.warehouses;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import a2mz.nova4j.entity.header.MethodProperties;
+import a2mz.nova4j.entity.common.MethodProperties;
 
 /**
  * Created by Morozov Oleksandr on 07.12.2016.

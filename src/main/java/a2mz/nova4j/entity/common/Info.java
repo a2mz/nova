@@ -1,4 +1,4 @@
-package a2mz.nova4j.entity.contragents.counterparty;
+package a2mz.nova4j.entity.common;
 
 /**
  * Created by Morozov Oleksandr on 14.12.2016.

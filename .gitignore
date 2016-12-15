@@ -46,4 +46,4 @@ fabric.properties
 .gitignore
 .idea/
 target/
-Runner.java
+/src/main/java/a2mz/nova4j/Runner.java

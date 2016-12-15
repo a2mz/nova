@@ -1,7 +1,10 @@
 package a2mz.nova4j.entity;
 
+import a2mz.nova4j.entity.address.city.CityResp;
 import a2mz.nova4j.entity.address.save.SaveResp;
+import a2mz.nova4j.entity.contragents.contactpersons.CounterpartyContactPersonsResp;
 import a2mz.nova4j.entity.contragents.counterparty.CounterpartyResp;
+import a2mz.nova4j.entity.contragents.counterpartyaddresses.CounterpartyAddressesResp;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import a2mz.nova4j.entity.address.street.StreetResp;
@@ -166,7 +169,8 @@ public class AddressFactoryDeserializationTest {
      	Assert.assertEquals(out.getData().get(0).getRef(), "503702df-cd4c-11e4-bdb5-005056801329" );
 
 	}
-@Test
+
+	@Test
 	public void  updateAddress() throws Exception {
 		String expected = "{\n" +
 				"\"success\": true,\n" +
@@ -187,7 +191,7 @@ public class AddressFactoryDeserializationTest {
      	Assert.assertEquals(out.getData().get(0).getRef(), "d5aa1638-1dbf-11e6-a70c-005056801333" );
 	}
 
-@Test
+    @Test
 	public void  deleteAddress() throws Exception {
 		String expected = "{\n" +
 				"\"success\": true,\n" +
@@ -207,8 +211,6 @@ public class AddressFactoryDeserializationTest {
         Assert.assertEquals(out.getSuccess(), true );
      	Assert.assertEquals(out.getData().get(0).getRef(), "d5aa1638-1dbf-11e6-a70c-005056801333" );
 	}
-
-
 
 	@Test
 	public void  getStreet() throws Exception {
@@ -433,9 +435,172 @@ public class AddressFactoryDeserializationTest {
 
 	}
 
+	@Test
+	public void  getCity() throws Exception {
+		String expected = "{\n" +
+				"  \"success\": true,\n" +
+				"  \"data\": [\n" +
+				"    {\n" +
+				"      \"Description\": \"Бровари\",\n" +
+				"      \"DescriptionRu\": \"Бровары\",\n" +
+				"      \"Ref\": \"db5c88d7-391c-11dd-90d9-001a92567626\",\n" +
+				"      \"Delivery1\": \"1\",\n" +
+				"      \"Delivery2\": \"1\",\n" +
+				"      \"Delivery3\": \"1\",\n" +
+				"      \"Delivery4\": \"1\",\n" +
+				"      \"Delivery5\": \"1\",\n" +
+				"      \"Delivery6\": \"1\",\n" +
+				"      \"Delivery7\": \"0\",\n" +
+				"      \"Area\": \"71508131-9b87-11de-822f-000c2965ae0e\",\n" +
+				"      \"PreventEntryNewStreetsUser\": null,\n" +
+				"      \"Conglomerates\": [\n" +
+				"        \"d4771ed0-4fb7-11e4-91b8-2f592fe1dcac\",\n" +
+				"        \"f86b75e9-42f4-11e4-91b8-2f592fe1dcac\"\n" +
+				"      ],\n" +
+				"      \"CityID\": \"27\"\n" +
+				"    }\n" +
+				"  ],\n" +
+				"  \"errors\": [],\n" +
+				"  \"warnings\": [],\n" +
+				"  \"info\": {\n" +
+				"    \"totalCount\": 1\n" +
+				"  },\n" +
+				"  \"messageCodes\": [],\n" +
+				"  \"errorCodes\": [],\n" +
+				"  \"warningCodes\": [],\n" +
+				"  \"infoCodes\": []\n" +
+				"}";
 
+		CityResp out = mapper.readValue(expected, CityResp.class);
 
+		Assert.assertNotNull(out);
+		Assert.assertEquals(true, out.getSuccess());
+		Assert.assertEquals(1,out.getData().size() );
+		Assert.assertEquals(1,out.getInfo().getTotalCount().intValue());
 
+ expected = "{\n" +
+		 "  \"success\": true,\n" +
+		 "  \"data\": [],\n" +
+		 "  \"errors\": [],\n" +
+		 "  \"warnings\": [],\n" +
+		 "  \"info\": {\n" +
+		 "    \"totalCount\": 0\n" +
+		 "  },\n" +
+		 "  \"messageCodes\": [],\n" +
+		 "  \"errorCodes\": [],\n" +
+		 "  \"warningCodes\": [],\n" +
+		 "  \"infoCodes\": []\n" +
+		 "}";
+
+		 out = mapper.readValue(expected, CityResp.class);
+
+		Assert.assertNotNull(out);
+		Assert.assertEquals(true, out.getSuccess());
+		Assert.assertEquals(0,out.getData().size() );
+		Assert.assertEquals(0,out.getInfo().getTotalCount().intValue());
+ expected = "{\n" +
+		 "  \"success\": true,\n" +
+		 "  \"data\": [\n" +
+		 "    {\n" +
+		 "      \"Description\": \"Чернівці\",\n" +
+		 "      \"DescriptionRu\": \"Черновцы\",\n" +
+		 "      \"Ref\": \"e221d642-391c-11dd-90d9-001a92567626\",\n" +
+		 "      \"Delivery1\": \"1\",\n" +
+		 "      \"Delivery2\": \"1\",\n" +
+		 "      \"Delivery3\": \"1\",\n" +
+		 "      \"Delivery4\": \"1\",\n" +
+		 "      \"Delivery5\": \"1\",\n" +
+		 "      \"Delivery6\": \"1\",\n" +
+		 "      \"Delivery7\": \"0\",\n" +
+		 "      \"Area\": \"7150813f-9b87-11de-822f-000c2965ae0e\",\n" +
+		 "      \"PreventEntryNewStreetsUser\": null,\n" +
+		 "      \"Conglomerates\": null,\n" +
+		 "      \"CityID\": \"20\"\n" +
+		 "    },\n" +
+		 "    {\n" +
+		 "      \"Description\": \"Чернівці(Вінницька обл.)\",\n" +
+		 "      \"DescriptionRu\": \"Черновцы (Винницкая обл.)\",\n" +
+		 "      \"Ref\": \"69da415a-3f5d-11de-b509-001d92f78698\",\n" +
+		 "      \"Delivery1\": \"1\",\n" +
+		 "      \"Delivery2\": \"1\",\n" +
+		 "      \"Delivery3\": \"1\",\n" +
+		 "      \"Delivery4\": \"1\",\n" +
+		 "      \"Delivery5\": \"1\",\n" +
+		 "      \"Delivery6\": \"0\",\n" +
+		 "      \"Delivery7\": \"0\",\n" +
+		 "      \"Area\": \"71508129-9b87-11de-822f-000c2965ae0e\",\n" +
+		 "      \"PreventEntryNewStreetsUser\": null,\n" +
+		 "      \"Conglomerates\": null,\n" +
+		 "      \"CityID\": \"538\"\n" +
+		 "    },\n" +
+		 "    {\n" +
+		 "      \"Description\": \"Чернігів\",\n" +
+		 "      \"DescriptionRu\": \"Чернигов\",\n" +
+		 "      \"Ref\": \"db5c897c-391c-11dd-90d9-001a92567626\",\n" +
+		 "      \"Delivery1\": \"1\",\n" +
+		 "      \"Delivery2\": \"1\",\n" +
+		 "      \"Delivery3\": \"1\",\n" +
+		 "      \"Delivery4\": \"1\",\n" +
+		 "      \"Delivery5\": \"1\",\n" +
+		 "      \"Delivery6\": \"1\",\n" +
+		 "      \"Delivery7\": \"0\",\n" +
+		 "      \"Area\": \"71508140-9b87-11de-822f-000c2965ae0e\",\n" +
+		 "      \"PreventEntryNewStreetsUser\": null,\n" +
+		 "      \"Conglomerates\": null,\n" +
+		 "      \"CityID\": \"57\"\n" +
+		 "    },\n" +
+		 "    {\n" +
+		 "      \"Description\": \"Чернігівка\",\n" +
+		 "      \"DescriptionRu\": \"Черниговка\",\n" +
+		 "      \"Ref\": \"69da41f9-3f5d-11de-b509-001d92f78698\",\n" +
+		 "      \"Delivery1\": \"1\",\n" +
+		 "      \"Delivery2\": \"1\",\n" +
+		 "      \"Delivery3\": \"1\",\n" +
+		 "      \"Delivery4\": \"1\",\n" +
+		 "      \"Delivery5\": \"1\",\n" +
+		 "      \"Delivery6\": \"0\",\n" +
+		 "      \"Delivery7\": \"0\",\n" +
+		 "      \"Area\": \"7150812f-9b87-11de-822f-000c2965ae0e\",\n" +
+		 "      \"PreventEntryNewStreetsUser\": null,\n" +
+		 "      \"Conglomerates\": null,\n" +
+		 "      \"CityID\": \"245\"\n" +
+		 "    },\n" +
+		 "    {\n" +
+		 "      \"Description\": \"Черніїв\",\n" +
+		 "      \"DescriptionRu\": \"Черниев\",\n" +
+		 "      \"Ref\": \"67b26074-a034-11e6-b5da-005056887b8d\",\n" +
+		 "      \"Delivery1\": \"1\",\n" +
+		 "      \"Delivery2\": \"1\",\n" +
+		 "      \"Delivery3\": \"1\",\n" +
+		 "      \"Delivery4\": \"1\",\n" +
+		 "      \"Delivery5\": \"1\",\n" +
+		 "      \"Delivery6\": \"0\",\n" +
+		 "      \"Delivery7\": \"0\",\n" +
+		 "      \"Area\": \"71508130-9b87-11de-822f-000c2965ae0e\",\n" +
+		 "      \"PreventEntryNewStreetsUser\": null,\n" +
+		 "      \"Conglomerates\": null,\n" +
+		 "      \"CityID\": \"1294\"\n" +
+		 "    }\n" +
+		 "  ],\n" +
+		 "  \"errors\": [],\n" +
+		 "  \"warnings\": [],\n" +
+		 "  \"info\": {\n" +
+		 "    \"totalCount\": 5\n" +
+		 "  },\n" +
+		 "  \"messageCodes\": [],\n" +
+		 "  \"errorCodes\": [],\n" +
+		 "  \"warningCodes\": [],\n" +
+		 "  \"infoCodes\": []\n" +
+		 "}";
+
+		 out = mapper.readValue(expected, CityResp.class);
+
+		Assert.assertNotNull(out);
+		Assert.assertEquals(true, out.getSuccess());
+		Assert.assertEquals(5,out.getData().size() );
+		Assert.assertEquals(5,out.getInfo().getTotalCount().intValue());
+
+	}
 
 	@Test
 	public void  getCounterparty() throws Exception {
@@ -526,23 +691,122 @@ public class AddressFactoryDeserializationTest {
 		Assert.assertNotNull(out);
 		Assert.assertEquals(out.getSuccess(), false );
 		Assert.assertEquals(out.getData().size(), 0 );
-
 		System.out.println(out.getErrors().toString());
-
 		Assert.assertEquals( "CounterpartyProperty is invalid" ,out.getErrors().get(0));
 	}
 
+	@Test
+	public void  getContactPerson() throws Exception {
+		String expected = "{\n" +
+				"  \"success\": true,\n" +
+				"  \"data\": [\n" +
+				"    {\n" +
+			    "\"Description\": \"Катчер Ештон Давидович\",\n" +
+				"\"Ref\": \"344a7107-ccac-11e4-bdb5-005056801329\",\n" +
+				"\"Phones\": \"380974534723\",\n" +
+				"\"Email\": \"\",\n" +
+				"\"LastName\": \"Катчер\",\n" +
+				"\"FirstName\": \"Ештон\",\n" +
+				"\"MiddleName\": \"Давидович\"" +
+				"    }\n" +
+				"  ],\n" +
+				"  \"errors\": [],\n" +
+				"  \"warnings\": [],\n" +
+				"  \"info\": {\n" +
+				"    \"totalCount\": 1\n" +
+				"  },\n" +
+				"  \"messageCodes\": [],\n" +
+				"  \"errorCodes\": [],\n" +
+				"  \"warningCodes\": [],\n" +
+				"  \"infoCodes\": []\n" +
+				"}";
+		CounterpartyContactPersonsResp out = mapper.readValue(expected, CounterpartyContactPersonsResp.class);
+		Assert.assertNotNull(out);
+		Assert.assertEquals(out.getSuccess(), true );
+		Assert.assertEquals(out.getData().get(0).getRef(), "344a7107-ccac-11e4-bdb5-005056801329" );
+
+		  expected = "{\n" +
+				  "  \"success\": false,\n" +
+				  "  \"data\": [],\n" +
+				  "  \"errors\": [\n" +
+				  "    \"Counterparty not found\"\n" +
+				  "  ],\n" +
+				  "  \"warnings\": [],\n" +
+				  "  \"info\": [],\n" +
+				  "  \"messageCodes\": [],\n" +
+				  "  \"errorCodes\": [\n" +
+				  "    \"20000400454\"\n" +
+				  "  ],\n" +
+				  "  \"warningCodes\": [],\n" +
+				  "  \"infoCodes\": []\n" +
+				  "}";
+		 out = mapper.readValue(expected, CounterpartyContactPersonsResp.class);
+		Assert.assertNotNull(out);
+		Assert.assertEquals(false, out.getSuccess());
+		Assert.assertEquals("20000400454",out.getErrorCodes().get(0));
+	}
+
+	@Test
+	public void  getCounterpartyAddresses() throws Exception {
+		String expected = "{\n" +
+				"  \"success\": true,\n" +
+				"  \"data\": [\n" +
+				"    {\n" +
+				"      \"Description\": \"Катчер Ештон Давидович\",\n" +
+				"      \"Phones\": \"380934697196\",\n" +
+				"      \"Email\": \"blablabla@platinumbank.com.ua\",\n" +
+				"      \"Ref\": \"7f0f351d-2519-11df-be9a-000c291af1b3\",\n" +
+				"      \"LastName\": \"Катчер\",\n" +
+				"      \"FirstName\": \"Ештон\",\n" +
+				"      \"MiddleName\": \"Давидович\"\n" +
+				"    }\n" +
+				"  ],\n" +
+				"  \"errors\": [],\n" +
+				"  \"warnings\": [],\n" +
+				"  \"info\": {\n" +
+				"    \"totalCount\": 1\n" +
+				"  },\n" +
+				"  \"messageCodes\": [],\n" +
+				"  \"errorCodes\": [],\n" +
+				"  \"warningCodes\": [],\n" +
+				"  \"infoCodes\": []\n" +
+				"}";
+		CounterpartyAddressesResp out = mapper.readValue(expected, CounterpartyAddressesResp.class);
+		Assert.assertNotNull(out);
+		Assert.assertEquals(out.getSuccess(), true );
+		Assert.assertEquals(out.getData().get(0).getRef(), "7f0f351d-2519-11df-be9a-000c291af1b3" );
+
+		expected = "{\n" +
+				"  \"success\": false,\n" +
+				"  \"data\": [],\n" +
+				"  \"errors\": [\n" +
+				"    \"Counterparty not found\"\n" +
+				"  ],\n" +
+				"  \"warnings\": [],\n" +
+				"  \"info\": [],\n" +
+				"  \"messageCodes\": [],\n" +
+				"  \"errorCodes\": [\n" +
+				"    \"20000400454\"\n" +
+				"  ],\n" +
+				"  \"warningCodes\": [],\n" +
+				"  \"infoCodes\": []\n" +
+				"}";
+		 out = mapper.readValue(expected, CounterpartyAddressesResp.class);
+		Assert.assertNotNull(out);
+		Assert.assertEquals(false, out.getSuccess());
+		Assert.assertEquals(out.getErrors().get(0), "Counterparty not found" );
+	}
+//
 //
 //	@Test
 //	public void  getStreet() throws Exception {
 //		String expected = "";
 //		UpdateResp out = mapper.readValue(expected, UpdateResp.class);
 //		Assert.assertNotNull(out);
-//		Assert.assertEquals(out.getSuccess(), true );
-//		Assert.assertEquals(out.getData().get(0).getRef(), "d5aa1638-1dbf-11e6-a70c-005056801333" );
+//		Assert.assertEquals(true, out.getSuccess());
+//		Assert.assertEquals( "d5aa1638-1dbf-11e6-a70c-005056801333" ,out.getData().get(0).getRef());
 //	}
 //
-
 
 
 

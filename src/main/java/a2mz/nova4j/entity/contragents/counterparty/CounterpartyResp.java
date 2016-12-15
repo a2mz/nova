@@ -5,6 +5,7 @@ package a2mz.nova4j.entity.contragents.counterparty;
  * 414D
  */
 
+import a2mz.nova4j.entity.common.Info;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -195,4 +196,18 @@ public class CounterpartyResp {
 		this.infoCodes = infoCodes;
 	}
 
+	@Override
+	public String toString() {
+		return "CounterpartyResp{" +
+				"success=" + success +
+				", data=" + data +
+				", errors=" + errors +
+				", warnings=" + warnings +
+				", info=" + info +
+				", messageCodes=" + messageCodes +
+				", errorCodes=" + errorCodes +
+				", warningCodes=" + warningCodes +
+				", infoCodes=" + infoCodes +
+				'}';
+	}
 }

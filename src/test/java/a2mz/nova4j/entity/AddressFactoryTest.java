@@ -1,8 +1,8 @@
 package a2mz.nova4j.entity;
 
 import a2mz.nova4j.entity.address.AddressFactory;
-import a2mz.nova4j.entity.header.CalledMethod;
-import a2mz.nova4j.entity.header.ModelName;
+import a2mz.nova4j.entity.common.CalledMethod;
+import a2mz.nova4j.entity.common.ModelName;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class AddressFactoryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		factory = new AddressFactory("key");
+		factory = new AddressFactory("key", null);
 		mapper = new ObjectMapper();
 	}
 
@@ -253,7 +253,8 @@ public class AddressFactoryTest {
 		Assert.assertEquals(expected, mapper.writeValueAsString(result));
 
 
-	}	@Test
+	}
+	@Test
 	public void constructDeleteAddressRequest() throws Exception {
 
 		Class[] cArg = new Class[3];
