@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -16,6 +17,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 /**
  * Created by Morozov Oleksandr on 02.12.2016.
@@ -23,15 +25,17 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 public class HttpClient<A> {
+	private final Optional<RequestConfig> config;
+	private final Class<A> typeParameterClass;
 
-	final Class<A> typeParameterClass;
-
-	private HttpClient(Class<A> typeParameterClass) {
+	private HttpClient(Class<A> typeParameterClass, Optional<RequestConfig> config) {
 		this.typeParameterClass = typeParameterClass;
+		this.config = config;
 	}
 
-	public static <A> HttpClient<A> createHttpClient(Class<A> typeParameterClass) {
-		return new HttpClient<A>(typeParameterClass);
+	public static <A> HttpClient<A> createHttpClient(Class<A> typeParameterClass, Optional<RequestConfig> config) {
+
+		return new HttpClient<A>(typeParameterClass, config);
 	}
 
 	public A sendPost(String url, Object o) throws IOException, RequestStatusException {
@@ -41,8 +45,8 @@ public class HttpClient<A> {
 			ObjectMapper mapper = new ObjectMapper().enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
 			String json = mapper.writeValueAsString(o);
 			log.info(json);
-
 			HttpPost post = new HttpPost(url);
+			config.ifPresent(post::setConfig);
 			log.info(url);
 			post.setHeader("Content-Type", "application/json");
 			StringEntity input = new StringEntity(json, "UTF-8");

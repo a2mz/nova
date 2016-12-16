@@ -5,8 +5,8 @@ import a2mz.nova4j.entity.address.save.SaveResp;
 import a2mz.nova4j.entity.address.settlement.SettlementsReq;
 import a2mz.nova4j.entity.address.settlement.SettlementsResp;
 import a2mz.nova4j.entity.address.street.StreetReq;
-import a2mz.nova4j.entity.header.CalledMethod;
-import a2mz.nova4j.entity.header.ModelName;
+import a2mz.nova4j.entity.common.CalledMethod;
+import a2mz.nova4j.entity.common.ModelName;
 import a2mz.nova4j.entity.ServiceModel;
 import a2mz.nova4j.entity.address.area.AreaResp;
 import a2mz.nova4j.entity.address.city.CityReq;
@@ -21,8 +21,10 @@ import a2mz.nova4j.entity.address.warehouses.WarehousesResp;
 import a2mz.nova4j.exception.RequestStatusException;
 import a2mz.nova4j.sender.HttpClient;
 import a2mz.nova4j.sender.HttpConfig;
+import org.apache.http.client.config.RequestConfig;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by Morozov Oleksandr on 30.11.2016.
@@ -30,9 +32,10 @@ import java.io.IOException;
  */
 public class AddressFactory {
 	private final String apiKey;
+	private final Optional<RequestConfig> requestConfig;
 
-
-	public AddressFactory(String apiKey) {
+	public AddressFactory(String apiKey, Optional<RequestConfig> requestConfig) {
+		this.requestConfig=requestConfig;
 		this.apiKey = apiKey;
 	}
 
@@ -77,7 +80,7 @@ public class AddressFactory {
 		CalledMethod method = CalledMethod.GET_AREAS;
 		ModelName model = ModelName.ADDRESS;
 
-		return HttpClient.createHttpClient(AreaResp.class)
+		return HttpClient.createHttpClient(AreaResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructAreaRequest(model, method));
 	}
 
@@ -186,7 +189,7 @@ public class AddressFactory {
 	public SettlementsResp getSettlements(String areaRef, String ref, Boolean mainCitiesOnly, Boolean hideMainCities, String regionRef) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.GET_SETTLEMENTS;
 		ModelName model = ModelName.ADDRESS_GENERAL;
-		return HttpClient.createHttpClient(SettlementsResp.class)
+		return HttpClient.createHttpClient(SettlementsResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructSettlementsRequest(areaRef, ref, mainCitiesOnly, hideMainCities, regionRef, model, method));
 	}
 
@@ -272,7 +275,7 @@ public class AddressFactory {
 	public CityResp getCities(String ref, String findByString) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.GET_CITIES;
 		ModelName model = ModelName.ADDRESS;
-		return HttpClient.createHttpClient(CityResp.class)
+		return HttpClient.createHttpClient(CityResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructCitiesRequest(ref, findByString, model, method));
 	}
 
@@ -389,7 +392,7 @@ public class AddressFactory {
 	public WarehousesResp getWarehouses(String cityName, String cityRef) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.GET_WAREHOUSES;
 		ModelName model = ModelName.ADDRESS_GENERAL;
-		return HttpClient.createHttpClient(WarehousesResp.class)
+		return HttpClient.createHttpClient(WarehousesResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructWarehousesRequest(cityName, cityRef, model, method));
 	}
 
@@ -462,7 +465,7 @@ public class AddressFactory {
 	public StreetResp getStreet(String findByString, String cityRef) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.GET_STREET;
 		ModelName model = ModelName.ADDRESS;
-		return HttpClient.createHttpClient(StreetResp.class)
+		return HttpClient.createHttpClient(StreetResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructStreetRequest(findByString, cityRef, model, method));
 	}
 
@@ -548,7 +551,7 @@ public class AddressFactory {
 	public SaveResp save(String counterpartyRef, String streetRef, String buildingNumber, String flat, String note) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.SAVE;
 		ModelName model = ModelName.ADDRESS;
-		return HttpClient.createHttpClient(SaveResp.class)
+		return HttpClient.createHttpClient(SaveResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructSaveAddressRequest(counterpartyRef, streetRef, buildingNumber, flat, note, model, method));
 	}
 
@@ -644,7 +647,7 @@ public class AddressFactory {
 	public UpdateResp update(String ref, String counterpartyRef, String streetRef, String buildingNumber, String flat, String note) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.UPDATE;
 		ModelName model = ModelName.ADDRESS;
-		return HttpClient.createHttpClient(UpdateResp.class)
+		return HttpClient.createHttpClient(UpdateResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructUpdateAddressRequest(ref, counterpartyRef, streetRef, buildingNumber, flat, note, model, method));
 	}
 
@@ -709,7 +712,7 @@ public class AddressFactory {
 	public DeleteResp delete(String ref) throws IOException, RequestStatusException {
 		CalledMethod method = CalledMethod.DELETE;
 		ModelName model = ModelName.ADDRESS;
-		return HttpClient.createHttpClient(DeleteResp.class)
+		return HttpClient.createHttpClient(DeleteResp.class,requestConfig)
 				.sendPost(getUrl(method, model), constructDeleteAddressRequest(ref, model, method));
 	}
 

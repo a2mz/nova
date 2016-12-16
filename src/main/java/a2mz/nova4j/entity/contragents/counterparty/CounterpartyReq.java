@@ -5,7 +5,7 @@ package a2mz.nova4j.entity.contragents.counterparty;
  * 414D
  */
 
-import a2mz.nova4j.entity.header.MethodProperties;
+import a2mz.nova4j.entity.common.MethodProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

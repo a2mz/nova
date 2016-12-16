@@ -1,10 +1,9 @@
 package a2mz.nova4j.entity.address.city;
-
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import java.util.List;
+import a2mz.nova4j.entity.common.Info;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -12,7 +11,11 @@ import java.util.List;
 		"data",
 		"errors",
 		"warnings",
-		"info"
+		"info",
+		"messageCodes",
+		"errorCodes",
+		"warningCodes",
+		"infoCodes"
 })
 public class CityResp {
 
@@ -25,133 +28,104 @@ public class CityResp {
 	@JsonProperty("warnings")
 	private List<Object> warnings = null;
 	@JsonProperty("info")
-	private List<Object> info = null;
+	private Info info;
+	@JsonProperty("messageCodes")
+	private List<Object> messageCodes = null;
+	@JsonProperty("errorCodes")
+	private List<Object> errorCodes = null;
+	@JsonProperty("warningCodes")
+	private List<Object> warningCodes = null;
+	@JsonProperty("infoCodes")
+	private List<Object> infoCodes = null;
 
-
-	/**
-	 *
-	 * @return
-	 * The success
-	 */
 	@JsonProperty("success")
 	public Boolean getSuccess() {
 		return success;
 	}
 
-	/**
-	 *
-	 * @param success
-	 * The success
-	 */
 	@JsonProperty("success")
 	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
 
-	public CityResp withSuccess(Boolean success) {
-		this.success = success;
-		return this;
-	}
-
-	/**
-	 *
-	 * @return
-	 * The data
-	 */
 	@JsonProperty("data")
 	public List<City> getData() {
 		return data;
 	}
 
-	/**
-	 *
-	 * @param data
-	 * The data
-	 */
 	@JsonProperty("data")
 	public void setData(List<City> data) {
 		this.data = data;
 	}
 
-	public CityResp withData(List<City> data) {
-		this.data = data;
-		return this;
-	}
-
-	/**
-	 *
-	 * @return
-	 * The errors
-	 */
 	@JsonProperty("errors")
 	public List<Object> getErrors() {
 		return errors;
 	}
 
-	/**
-	 *
-	 * @param errors
-	 * The errors
-	 */
 	@JsonProperty("errors")
 	public void setErrors(List<Object> errors) {
 		this.errors = errors;
 	}
 
-	public CityResp withErrors(List<Object> errors) {
-		this.errors = errors;
-		return this;
-	}
-
-	/**
-	 *
-	 * @return
-	 * The warnings
-	 */
 	@JsonProperty("warnings")
 	public List<Object> getWarnings() {
 		return warnings;
 	}
 
-	/**
-	 *
-	 * @param warnings
-	 * The warnings
-	 */
 	@JsonProperty("warnings")
 	public void setWarnings(List<Object> warnings) {
 		this.warnings = warnings;
 	}
 
-	public CityResp withWarnings(List<Object> warnings) {
-		this.warnings = warnings;
-		return this;
-	}
-
-	/**
-	 *
-	 * @return
-	 * The info
-	 */
 	@JsonProperty("info")
-	public List<Object> getInfo() {
+	public Info getInfo() {
 		return info;
 	}
 
-	/**
-	 *
-	 * @param info
-	 * The info
-	 */
 	@JsonProperty("info")
-	public void setInfo(List<Object> info) {
+	public void setInfo(Info info) {
 		this.info = info;
 	}
 
-	public CityResp withInfo(List<Object> info) {
-		this.info = info;
-		return this;
+	@JsonProperty("messageCodes")
+	public List<Object> getMessageCodes() {
+		return messageCodes;
 	}
 
+	@JsonProperty("messageCodes")
+	public void setMessageCodes(List<Object> messageCodes) {
+		this.messageCodes = messageCodes;
+	}
+
+	@JsonProperty("errorCodes")
+	public List<Object> getErrorCodes() {
+		return errorCodes;
+	}
+
+	@JsonProperty("errorCodes")
+	public void setErrorCodes(List<Object> errorCodes) {
+		this.errorCodes = errorCodes;
+	}
+
+	@JsonProperty("warningCodes")
+	public List<Object> getWarningCodes() {
+		return warningCodes;
+	}
+
+	@JsonProperty("warningCodes")
+	public void setWarningCodes(List<Object> warningCodes) {
+		this.warningCodes = warningCodes;
+	}
+
+	@JsonProperty("infoCodes")
+	public List<Object> getInfoCodes() {
+		return infoCodes;
+	}
+
+	@JsonProperty("infoCodes")
+	public void setInfoCodes(List<Object> infoCodes) {
+		this.infoCodes = infoCodes;
+	}
 
 }
