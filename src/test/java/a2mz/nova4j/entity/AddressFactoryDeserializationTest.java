@@ -5,6 +5,7 @@ import a2mz.nova4j.entity.address.save.SaveResp;
 import a2mz.nova4j.entity.contragents.contactpersons.CounterpartyContactPersonsResp;
 import a2mz.nova4j.entity.contragents.counterparty.CounterpartyResp;
 import a2mz.nova4j.entity.contragents.counterpartyaddresses.CounterpartyAddressesResp;
+import a2mz.nova4j.entity.contragents.options.CounterpartyOptionsResp;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import a2mz.nova4j.entity.address.street.StreetResp;
@@ -796,9 +797,54 @@ public class AddressFactoryDeserializationTest {
 		Assert.assertEquals(false, out.getSuccess());
 		Assert.assertEquals(out.getErrors().get(0), "Counterparty not found" );
 	}
-//
-//
-//	@Test
+
+
+	@Test
+	public void  getCounterpartyOptions() throws Exception {
+		String expected = "{\n" +
+				"  \"success\": true,\n" +
+				"  \"data\": [\n" +
+				"    {\n" +
+				"      \"FillingWarranty\": false,\n" +
+				"      \"AddressDocumentDelivery\": false,\n" +
+				"      \"CanPayTheThirdPerson\": false,\n" +
+				"      \"CanAfterpaymentOnGoodsCost\": false,\n" +
+				"      \"CanNonCashPayment\": true,\n" +
+				"      \"CanCreditDocuments\": false,\n" +
+				"      \"CanEWTransporter\": false,\n" +
+				"      \"CanSignedDocuments\": false,\n" +
+				"      \"HideDeliveryCost\": false,\n" +
+				"      \"BlockInternationalSenderLKK\": false,\n" +
+				"      \"CanSameDayDelivery\": false,\n" +
+				"      \"CanSameDayDeliveryStandart\": true,\n" +
+				"      \"CanForwardingService\": false,\n" +
+				"      \"ShowDeliveryByHand\": false,\n" +
+				"      \"DeliveryByHand\": false,\n" +
+				"      \"LoyaltyProgram\": false,\n" +
+				"      \"DescentFromFloor\": false,\n" +
+				"      \"BackDeliveryValuablePapers\": false,\n" +
+				"      \"BackwardDeliverySubtypesDocuments\": false,\n" +
+				"      \"AfterpaymentType\": \"NovaPoshta\",\n" +
+				"      \"HaveMoneyWallets\": false\n" +
+				"    }\n" +
+				"  ],\n" +
+				"  \"errors\": [],\n" +
+				"  \"warnings\": [],\n" +
+				"  \"info\": [],\n" +
+				"  \"messageCodes\": [],\n" +
+				"  \"errorCodes\": [],\n" +
+				"  \"warningCodes\": [],\n" +
+				"  \"infoCodes\": []\n" +
+				"}";
+		CounterpartyOptionsResp out = mapper.readValue(expected, CounterpartyOptionsResp.class);
+		Assert.assertNotNull(out);
+		Assert.assertEquals(true, out.getSuccess());
+		Assert.assertEquals( "NovaPoshta" ,out.getData().get(0).getAfterpaymentType());
+	}
+
+
+
+////	@Test
 //	public void  getStreet() throws Exception {
 //		String expected = "";
 //		UpdateResp out = mapper.readValue(expected, UpdateResp.class);

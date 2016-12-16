@@ -15,7 +15,9 @@ public enum CalledMethod {
 	GET_STREET("getStreet"),
 	GET_COUNTERPARTIES("getCounterparties"),
 	GET_COUNTERPARTY_CONTACT_PERSONS("getCounterpartyContactPersons"),
-	GET_COUNTERPARTY_ADDRESSES("getCounterpartyContactPersons");
+	GET_COUNTERPARTY_ADDRESSES("getCounterpartyContactPersons"),
+	GET_COUNTERPARTY_OPTIONS("getCounterpartyOptions");
+
 	private String val;
 
 	CalledMethod(String val) {
